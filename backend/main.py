@@ -68,8 +68,19 @@ def decrypt(request: DecryptRequest):
 
         return {"message": result}
 
-    except (InvalidTag, ValueError, binascii.Error):
+    except InvalidTag:
         raise HTTPException(
             status_code=400,
-            detail="Decryption failed: invalid key or encrypted data"
+            detail={
+                "code": "AUTHENTICATION_FAILED",
+                "message": "AES-GCM authentication failed"
+            }
+        )
+    except (ValueError, binascii.Error):
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "code": "INVALID_ENCRYPTED_DATA",
+                "message": "Invalid key or encrypted data format"
+            }
         )

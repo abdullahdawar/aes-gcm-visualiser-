@@ -587,3 +587,112 @@ textarea {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* AES-GCM tamper detection visualization */
+
+.tamper-steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.tamper-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 10px;
+  background: rgba(212, 175, 55, 0.05);
+  font-size: 13px;
+}
+
+.step-number {
+  color: #d4af37;
+  font-weight: 700;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .tamper-steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ciphertext-comparison {
+  margin-top: 20px;
+  padding: 18px;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 12px;
+  background: rgba(10, 20, 40, 0.25);
+}
+
+.comparison-block {
+  margin-bottom: 16px;
+}
+
+.comparison-block h3 {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ciphertext-bytes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  font-family: monospace;
+  font-size: 13px;
+}
+
+.normal-byte {
+  padding: 6px 8px;
+  border-radius: 5px;
+  background: rgba(128, 128, 128, 0.12);
+}
+
+.changed-byte {
+  padding: 6px 8px;
+  border-radius: 5px;
+  color: #ff6b6b;
+  background: rgba(255, 80, 80, 0.15);
+  border: 1px solid rgba(255, 80, 80, 0.45);
+}
+
+.comparison-explanation {
+  margin: 12px 0 0;
+  padding: 12px;
+  border-left: 3px solid #d4af37;
+  border-radius: 4px;
+  background: rgba(212, 175, 55, 0.06);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.tamper-panel .secondary-button {
+  margin-top: 14px;
+}
+
+.tamper-panel .success-message,
+.tamper-panel .error-message {
+  margin-top: 16px;
+}
+
+/* Completed tamper verification stages */
+
+.tamper-step {
+  transition: border-color 0.25s ease,
+              background-color 0.25s ease,
+              transform 0.25s ease;
+}
+
+.tamper-step.completed {
+  border-color: rgba(212, 175, 55, 0.85);
+  background: rgba(212, 175, 55, 0.14);
+}
+
+.tamper-step.completed .step-number {
+  color: #f5d76e;
+}
