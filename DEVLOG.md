@@ -182,3 +182,136 @@ Throughout this document, completed implementation
 and confirmed testing are identified separately.
 
 ---
+
+---
+
+# 2. Development History
+
+## 2.1 Project Origins
+
+The AES-256-GCM Visualizer began as an educational
+software project intended to make authenticated
+encryption easier to understand.
+
+The objective was to build a working encryption
+system rather than a purely theoretical simulation.
+
+The project combines a Python backend with a
+React and TypeScript frontend.
+
+Development initially focused on establishing
+the cryptographic functionality and then making
+the encryption process accessible through a
+visual interface.
+
+## 2.2 Development Environment
+
+The application was developed on macOS.
+
+The backend uses Python 3.12, FastAPI, Uvicorn,
+and the cryptography library.
+
+The frontend uses React, TypeScript, Vite,
+and Lucide icons.
+
+Visual Studio Code and Terminal were used
+throughout the development process.
+
+Git provides local version control, while
+GitHub hosts the remote repository.
+
+## 2.3 Initial Implementation
+
+The first implementation phase established
+the AES-256-GCM encryption and decryption logic.
+
+The backend was then extended with API endpoints
+that allow the frontend to request encryption
+and decryption operations.
+
+The frontend was developed to demonstrate
+the roles of a sender and recipient.
+
+Additional interface components explain the
+encryption process, display security details,
+and demonstrate tamper detection.
+
+## 2.4 Version Control Milestone
+
+On October 11, 2026, the existing application
+was committed to Git for the first time.
+
+Initial commit:
+56c8f01
+
+Commit message:
+chore: establish baseline AES-256-GCM visualizer
+
+The repository was subsequently uploaded to
+GitHub using SSH authentication.
+
+This commit represents the first recorded Git
+baseline, not the beginning of development.
+
+Earlier development activities are documented
+retrospectively in this log.
+
+
+---
+
+# 3. Visual Tamper Detection Enhancement
+
+## 3.1 Development Date
+
+October 12, 2026
+
+## 3.2 Objective
+
+The original tamper detection functionality allowed
+users to modify encrypted ciphertext and verify
+whether AES-256-GCM rejected the modified message.
+
+Although the cryptographic test worked, its visual
+presentation was limited.
+
+The objective of this enhancement was to make the
+authentication process easier to understand by
+displaying how ciphertext changes and how the
+system responds to unauthorized modification.
+
+## 3.3 Ciphertext Visualization
+
+A new React component named CiphertextComparison
+was introduced.
+
+The component converts Base64-encoded ciphertext
+into hexadecimal byte values.
+
+It displays the original ciphertext alongside
+the modified version and highlights the changed
+byte in red.
+
+The demonstration modifies one bit of actual
+encrypted data rather than displaying a simulated
+modification.
+
+## 3.4 Authentication Progress Visualization
+
+The tamper detection interface was extended with
+four explanatory stages:
+
+1. Original ciphertext generated.
+2. One ciphertext bit modified.
+3. Authentication attempted.
+4. Verification result displayed.
+
+Progress indicators highlight completed stages
+using the application's visual theme.
+
+A reset button allows users to clear the displayed
+results and repeat the demonstration.
+
+The progress indicators reflect application state;
+they are not a timing measurement of cryptographic
+operations.
+
