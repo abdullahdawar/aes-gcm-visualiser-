@@ -5,20 +5,44 @@ import type {
 
 const API_URL = "http://127.0.0.1:8000";
 
+export class ApiError extends Error {
+  readonly code: string;
+  readonly status: number;
+
+  constructor(
+    message: string,
+    code: string,
+    status: number
+  ) {
+    super(message);
+    this.name = "ApiError";
+    this.code = code;
+    this.status = status;
+  }
+}
+
 async function handleResponse<T>(
   response: Response
 ): Promise<T> {
   if (!response.ok) {
-    let message = "An unexpected error occurred";
+    let message = `HTTP error ${response.status}`;
+    let code = "UNKNOWN_ERROR";
 
     try {
       const error = await response.json();
-      message = error.detail || message;
+      const detail = error.detail;
+
+      if (typeof detail === "string") {
+        message = detail;
+      } else if (detail && typeof detail === "object") {
+        message = detail.message || message;
+        code = detail.code || code;
+      }
     } catch {
-      message = `HTTP error ${response.status}`;
+      // Preserve the HTTP error if the response is not JSON.
     }
 
-    throw new Error(message);
+    throw new ApiError(message, code, response.status);
   }
 
   return response.json() as Promise<T>;
